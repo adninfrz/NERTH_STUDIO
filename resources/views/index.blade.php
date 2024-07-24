@@ -20,6 +20,8 @@
 
     <div class="border-gray-200 dark:bg-gray-900 h-full flex flex-col justify-between">
         <div class="mt-20 mx-24">
+
+            <!-- Navigation -->
             <div class="flex justify-between">
                 <button type="button" data-modal-target="authentication-modal"
                     data-modal-toggle="authentication-modal">
@@ -36,6 +38,7 @@
                 </button>
             </div>
 
+            <!-- Login Form -->
             <div id="authentication-modal" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-lg max-h-full">
@@ -92,6 +95,7 @@
                 </div>
             </div>
 
+            <!-- Cart Details -->
             <div id="drawer-right"
                 class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-96 dark:bg-gray-800"
                 tabindex="-1" aria-labelledby="drawer-right-label">
@@ -110,10 +114,20 @@
             </div>
         </div>
 
-        <div class="mx-24 mb-10">
-            <a href="#">
-                <h1>EXTRAS</h1>
-            </a>
+        <!-- Footer -->
+        <div class="mx-24 mb-20">
+
+            <div class="flex justify-between">
+                <a href="#">
+                    <h1>EXTRAS</h1>
+                </a>
+                <a href="">
+                    CUSTOMER SERVICES
+                </a>
+                <a href="">
+                    SOCIAL
+                </a>
+            </div>
         </div>
     </div>
 
