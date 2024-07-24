@@ -14,22 +14,16 @@ class MainController extends Controller
         return view ('index');
     }
 
-<<<<<<< HEAD
-
-
     public function about()
     {
         return view ('about');
     }
 
-
-=======
     public function product()
     {
         return view ('product');
     }
 
->>>>>>> 16d00768a0048c6a89c13428a7b9e31804160874
     /**
      * Show the form for creating a new resource.
      */
