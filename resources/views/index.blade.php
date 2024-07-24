@@ -29,7 +29,7 @@
                 </button>
                 <div class="pt-10">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('img/Home Icon.png') }}" alt="Home Icon">
+                        <img src="{{ asset('img/logo.png') }}" alt="logo">
                     </a>
                 </div>
                 <button class="font-medium text-xl px-5 py-2.5 mb-2" type="button" data-drawer-target="drawer-right"
@@ -115,10 +115,10 @@
             </div>
         </div>
 
-        <div class="">
-            <button>
-                <img src="{{ asset('img/Button.png') }}" alt="">
-            </button>
+        <div class="ml-56">
+            <a href="{{ route('product') }}">
+                <img src="{{ asset('img/button.png') }}" alt="">
+            </a>
         </div>
 
         <!-- Footer -->
