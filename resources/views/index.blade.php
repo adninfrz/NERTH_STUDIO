@@ -25,7 +25,7 @@
             <div class="flex justify-between">
                 <button type="button" data-modal-target="authentication-modal"
                     data-modal-toggle="authentication-modal">
-                    LOGIN
+                    <h2>LOGIN</h2>
                 </button>
                 <div class="pt-10">
                     <a href="{{ route('home') }}">
@@ -34,7 +34,7 @@
                 </div>
                 <button class="font-medium text-xl px-5 py-2.5 mb-2" type="button" data-drawer-target="drawer-right"
                     data-drawer-show="drawer-right" data-drawer-placement="right" aria-controls="drawer-right">
-                    CART (0)
+                    <h2>CART (0)</h2>
                 </button>
             </div>
 
@@ -100,7 +100,8 @@
                 class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-96 dark:bg-gray-800"
                 tabindex="-1" aria-labelledby="drawer-right-label">
                 <h5 id="drawer-right-label"
-                    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">CART
+                    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+                    CART (0)
                 </h5>
                 <button type="button" data-drawer-hide="drawer-right" aria-controls="drawer-right"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -114,18 +115,24 @@
             </div>
         </div>
 
+        <div class="">
+            <button>
+                <img src="{{ asset('img/Button.png') }}" alt="">
+            </button>
+        </div>
+
         <!-- Footer -->
         <div class="mx-24 mb-20">
 
             <div class="flex justify-between">
                 <a href="#">
-                    <h1>EXTRAS</h1>
+                    <h2>EXTRAS</h2>
                 </a>
                 <a href="">
                     CUSTOMER SERVICES
                 </a>
                 <a href="">
-                    SOCIAL
+                    <h2>SOCIAL</h2>
                 </a>
             </div>
         </div>
