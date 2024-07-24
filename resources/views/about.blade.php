@@ -20,26 +20,36 @@
 
         <div class="container mx-auto p-4">
             <header class="mb-12">
-              <div class="container mx-auto p-4 flex justify-center items-center">
+                <div class="container mx-auto p-4 flex justify-center items-center">
                 <a href="{{ route('home') }}">
                     <img src="{{ asset('img/Nerth black.png') }}" alt="Home Icon">
                 </a>
             </div>
             </header>
-        <div class="bg-cover bg-center text-center mb-12 py-28" style="background-image: url('/img/about_bg.jpeg')">
-            <section>
+        <div class="w-full bg-cover bg-center text-center mb-12 " style="background-image: url('/img/about_bg.jpeg')">
+            <section class="container mx-auto pt-12">
                 <h2 class="text-3xl font-semibold">Welcome to Our World</h2>
                 <p class="mt-4">Explore the Best of Us</p>
                 <form class="mt-6">
-                    <input type="email" placeholder="Enter your email" class="p-2 border rounded-md">
+                    <ol>
+                        <li>
+                    <input type="email" placeholder="Enter your email" class="p-1 border rounded-md">
+                        </li>
+
+                        <li class="mt-7">
                     <button type="submit" class="p-2 bg-black text-white rounded-md">Subscribe</button>
+                        </li>
+                    </ol>
                 </form>
             </section>
     
-            <section class="text-center mb-12">
-                <div class="p-6 rounded-lg bg-stone-900/50 shadow-lg">
-                    <h3 class="text-xl font-semibold">What is Nerth Studio?</h3>
-                    <p class="mt-4">
+            <section class="mt-10 flex justify-between mb-12 p-6 rounded-lg bg-stone-900/40 shadow-lg">
+                <div>
+                    <img class="rounded-full w-32 mt-4 ml-40" src="img/nerth_logo.png" alt="">
+                </div>
+                <div class="ml-40">
+                    <h3 class="text-xl font-semibold text-left text-white">What is Nerth Studio?</h3>
+                    <p class="mt-4 mr-96 text-left text-white">
                         Merupakan sebuah brand fashion yang berfokus pada produksi dan pemasaran produk-produk fashion yang eksklusif.
                         Sebagai produk fashion yang bergerak di industri yang sangat dinamis, Nerth Studio sendiri berkomitmen
                         mengembangkan desain-desain inovatif yang mencerminkan tren terkini sambil tetap mempertahankan identitas Nerth Studio itu sendiri.
