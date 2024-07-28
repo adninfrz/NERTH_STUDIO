@@ -14,6 +14,11 @@ class MainController extends Controller
         return view ('index');
     }
 
+    public function about()
+    {
+        return view ('about');
+    }
+
     public function product()
     {
         return view ('product');

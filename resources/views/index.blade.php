@@ -7,6 +7,8 @@
 
     <title>Nerth Studio</title>
 
+    <link rel="shortcut icon" href="favicon.ico" type="img/logo.png">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -19,13 +21,13 @@
 <body class="bg-cover bg-center h-screen" style="background-image: url('/img/background.png');">
 
     <div class="border-gray-200 dark:bg-gray-900 h-full flex flex-col justify-between">
-        <div class="mt-20 mx-24">
+        <div class="mt-16 mx-24">
 
             <!-- Navigation -->
             <div class="flex justify-between">
-                <button type="button" data-modal-target="authentication-modal"
+                <button class="font-medium text-xl px-5 py-2.5 mb-2" type="button" data-modal-target="authentication-modal"
                     data-modal-toggle="authentication-modal">
-                    <h2>LOGIN</h2>
+                    <img src="{{ asset('img/login_icon.png') }}" alt="logo">
                 </button>
                 <div class="pt-10">
                     <a href="{{ route('home') }}">
@@ -34,7 +36,7 @@
                 </div>
                 <button class="font-medium text-xl px-5 py-2.5 mb-2" type="button" data-drawer-target="drawer-right"
                     data-drawer-show="drawer-right" data-drawer-placement="right" aria-controls="drawer-right">
-                    <h2>CART (0)</h2>
+                    <img src="{{ asset('img/cart(0)_icon.png') }}" alt="logo">
                 </button>
             </div>
 
@@ -125,15 +127,15 @@
         <div class="mx-24 mb-20">
 
             <div class="flex justify-between">
-                <a href="#">
-                    <h2>EXTRAS</h2>
+                <a href="{{ route('about') }}">
+                    <img src="{{ asset('img/extras_icon.png') }}" alt="logo">
                 </a>
-                <a href="">
-                    CUSTOMER SERVICES
+                <a href="https://wa.me/087723050090" target="_blank">
+                    <img src="{{ asset('img/customer_servive_icon.png') }}" alt="logo">
                 </a>
-                <a href="">
-                    <h2>SOCIAL</h2>
-                </a>
+                <button>
+                    <img src="{{ asset('img/social_icon.png') }}" alt="logo">
+                </button>
             </div>
         </div>
     </div>
