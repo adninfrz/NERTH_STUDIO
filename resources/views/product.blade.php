@@ -15,6 +15,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
 
@@ -45,7 +46,8 @@
                 </div>
                 <p class="text-xl mt-4">Idr. 149.900,00,-</p>
                 <div class="mt-5">
-                    <button class="bg-zinc-400 rounded-lg text-white px-6 py-3 text-lg mr-4">Size Chart</button>
+                    <button type="button"
+                    data-modal-target="authentication-size" data-modal-toggle="authentication-size" class="bg-zinc-400 rounded-lg text-white px-6 py-3 text-lg mr-4">Size Chart</button>
                 </div>
             </div>
             <div class="relative mr-72">
@@ -53,6 +55,13 @@
                 <div class="absolute top-80 right-20 bg-white px-4 py-2 text-sm">Only 20 Pieces Worldwide</div>
             </div>
         </div>
+        <div id="authentication-size" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="size_chart">
+                        <img src="{{asset ('img/size_chart.png')}}" alt="">
+                </div>
+        </div>
+
         <div class="flex mt-10 mb-20 justify-between">
             <div class="flex space-x-4">
                 <a href="https://www.tiktok.com" class="text-black">TikTok</a>

@@ -27,3 +27,10 @@
     left: 1190px;
     top: 530px;
 }
+
+.size_chart {
+    position: absolute;
+    left: 0px;
+    top: 10px;
+    size: 100px;
+}
