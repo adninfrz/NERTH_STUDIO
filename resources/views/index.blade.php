@@ -42,15 +42,14 @@
                 </button>
             </div>
 
-            <!-- Login Form -->
+            <!-- Login Form Modal -->
             <div id="authentication-modal" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-4 w-full max-w-lg max-h-full">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow">
                         <!-- Modal header -->
-                        <div
-                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                             <h3 class="text-xl font-semibold text-gray-900">
                                 Login To Your Account
                             </h3>
@@ -67,31 +66,22 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-4 md:p-5">
-                            <form class="space-y-4" action="#">
+                            <form method="POST" action="{{ route('customer.login') }}" class="space-y-4">
+                                @csrf
                                 <div>
-                                    <label for="email"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                                    <input type="email" name="email" id="email"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        placeholder="name@mail.com" required />
+                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                    <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@mail.com" required />
                                 </div>
                                 <div>
                                     <div class="flex justify-between">
-                                        <label for="password"
-                                            class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                                        <a href="#"
-                                            class="text-sm text-blue-700 hover:underline">Forgot?</a>
+                                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                                        <a href="{{ route('password.request') }}" class="text-sm text-blue-700 hover:underline">Forgot?</a>
                                     </div>
-                                    <input type="password" name="password" id="password" placeholder="••••••••"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        required />
+                                    <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                                 </div>
-                                <button type="submit"
-                                    class="w-full text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login
-                                    Now</button>
+                                <button type="submit" class="w-full text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login Now</button>
                                 <div class="text-sm font-medium text-gray-500">
-                                    Not registered? <a href=""
-                                        class="text-blue-700 hover:underline">Create account</a>
+                                    Not registered? <a href="{{ route('customer.register.page') }}" class="text-blue-700 hover:underline">Create account</a>
                                 </div>
                             </form>
                         </div>
@@ -135,7 +125,6 @@
 
         <!-- Footer -->
         <div class="mx-24 mb-20">
-
             <div class="flex justify-between">
                 <a href="{{ route('about') }}">
                     <img src="{{ asset('img/extras_icon.png') }}" alt="logo">
@@ -150,17 +139,17 @@
             </div>
             <div id="authentication-social" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        <div class="instagram">
-                            <a href="https://www.instagram.com/nerth.studio/" target="_blank">
-                                <img src="{{asset ('img/INSTAGRAM.PNG')}}" alt="">
-                            </a>
-                        </div>
-
-                        <div class="tiktok">
-                            <a href="https://www.tiktok.com/@nerth.studio?_r=1&_d=e4a27c4jjlg5c5&sec_uid=MS4wLjABAAAAdXwlrKEBbgz5IvCyQtHLFL0TyU5JEC2elnciv_N4My-GMIW6qJOObkfJpbHTHacJ&share_author_id=7223085511085458458&sharer_language=en&source=h5_t&u_code=dak532ij94m864&ug_btm=b6880,b5836&sec_user_id=MS4wLjABAAAA_cClL3-PkHQ76W4nidWkbGc__8USWs19n_ue7_IRNBwep2LzkAxnR5oNq6wE1oBa&utm_source=copy&social_share_type=5&utm_campaign=client_share&utm_medium=ios&tt_from=copy&user_id=6790887901447439361&enable_checksum=1&share_link_id=8AA3BC6B-4EBC-4FD4-8497-1F42FD99BA0A&share_app_id=1180" target="_blank">
-                                <img src="{{asset ('img/TIKTOK.PNG')}}" alt="">
-                            </a>
-                        </div>
+                <div class="instagram">
+                    <a href="https://www.instagram.com/nerth.studio/" target="_blank">
+                        <img src="{{asset ('img/INSTAGRAM.PNG')}}" alt="">
+                    </a>
+                </div>
+                <div class="tiktok">
+                    <a href="https://www.tiktok.com/@nerth.studio?_r=1&_d=e4a27c4jjlg5c5&sec_uid=MS4wLjABAAAAdXwlrKEBbgz5IvCyQtHLFL0TyU5JEC2elnciv_N4My-GMIW6qJOObkfJpbHTHacJ&share_author_id=7223085511085458458&sharer_language=en&source=h5_t&u_code=dak532ij94m864&ug_btm=b6880,b5836&sec_user_id=MS4wLjABAAAA_cClL3-PkHQ76W4nidWkbGc__8USWs19n_ue7_IRNBwep2LzkAxnR5oNq6wE1oBa&utm_source=copy&social_share_type=5&utm_campaign=client_share&utm_medium=ios&tt_from=copy&user_id=6790887901447439361&enable_checksum=1&share_link_id=8AA3BC6B-4EBC-4FD4-8497-1F42FD99BA0A&share_app_id=1180" target="_blank">
+                        <img src="{{asset ('img/TIKTOK.PNG')}}" alt="">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 

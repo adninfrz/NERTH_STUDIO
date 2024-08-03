@@ -10,14 +10,23 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [MainController::class,'index'])->name('home');
-Route::get('/about', [MainController::class,'about'])->name('about');
-Route::get('/product', [MainController::class,'product'])->name('product');
+// Main Routes
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/about', [MainController::class, 'about'])->name('about');
+Route::get('/product', [MainController::class, 'product'])->name('product');
 
+// Authentication Routes
+Route::get('/customer/register', [CustomerController::class, 'registerPage'])->name('customer.register.page');
+Route::post('/customer/register', [CustomerController::class, 'register'])->name('customer.register');
+Route::get('/customer/login', [CustomerController::class, 'login'])->name('customer.login');
+Route::post('/customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
+
+// Dashboard Route
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Authenticated Routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
