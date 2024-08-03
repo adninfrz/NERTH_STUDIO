@@ -117,7 +117,7 @@
             </div>
         </div>
 
-        <div class="ml-56">
+        <div class="ml-56 mr-auto">
             <a href="{{ route('product') }}">
                 <img src="{{ asset('img/button.png') }}" alt="">
             </a>
