@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartsController;
-use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomersController;
+
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('About', [MainController::class, 'about'])->name('about');
+Route::get('/product', [MainController::class, 'product'])->name('product');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -35,7 +37,3 @@ Route::middleware('auth')->group( function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('About', [MainController::class, 'about'])->name('about');
-Route::get('/product', [MainController::class, 'product'])->name('product');
