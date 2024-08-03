@@ -15,6 +15,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
     @vite('resources/css/app.css')
 </head>
 
@@ -117,10 +119,18 @@
             </div>
         </div>
 
-        <div class="ml-56 mr-auto">
+        <div class="collection1">
             <a href="{{ route('product') }}">
-                <img src="{{ asset('img/button.png') }}" alt="">
+                <img src="{{ asset('img/button.png') }}" alt="" class="hover:scale-125 transition-transform duration-500">
             </a>
+        </div>
+
+        <div class="collection2">
+            <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"></button>
+        </div>
+
+        <div class="collection3">
+            <button type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"></button>
         </div>
 
         <!-- Footer -->
@@ -133,10 +143,26 @@
                 <a href="https://wa.me/087723050090" target="_blank">
                     <img src="{{ asset('img/customer_servive_icon.png') }}" alt="logo">
                 </a>
-                <button>
+                <button type="button"
+                data-modal-target="authentication-social" data-modal-toggle="authentication-social">
                     <img src="{{ asset('img/social_icon.png') }}" alt="logo">
                 </button>
             </div>
+            <div id="authentication-social" tabindex="-1" aria-hidden="true"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-lg max-h-full">
+                        <div class="instagram">
+                            <a>
+                                <img src="{{asset ('img/INSTAGRAM.PNG')}}" alt="">
+                            </a>
+                        </div>
+
+                        <div class="tiktok">
+                            <a>
+                                <img src="{{asset ('img/TIKTOK.PNG')}}" alt="">
+                            </a>
+                        </div>
+                </div>
         </div>
     </div>
 
