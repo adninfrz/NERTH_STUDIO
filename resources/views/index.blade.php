@@ -150,19 +150,17 @@
             </div>
             <div id="authentication-social" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="relative p-4 w-full max-w-lg max-h-full">
                         <div class="instagram">
-                            <a>
+                            <a href="https://www.instagram.com/nerth.studio/" target="_blank">
                                 <img src="{{asset ('img/INSTAGRAM.PNG')}}" alt="">
                             </a>
                         </div>
 
                         <div class="tiktok">
-                            <a>
+                            <a href="https://www.tiktok.com/@nerth.studio?_r=1&_d=e4a27c4jjlg5c5&sec_uid=MS4wLjABAAAAdXwlrKEBbgz5IvCyQtHLFL0TyU5JEC2elnciv_N4My-GMIW6qJOObkfJpbHTHacJ&share_author_id=7223085511085458458&sharer_language=en&source=h5_t&u_code=dak532ij94m864&ug_btm=b6880,b5836&sec_user_id=MS4wLjABAAAA_cClL3-PkHQ76W4nidWkbGc__8USWs19n_ue7_IRNBwep2LzkAxnR5oNq6wE1oBa&utm_source=copy&social_share_type=5&utm_campaign=client_share&utm_medium=ios&tt_from=copy&user_id=6790887901447439361&enable_checksum=1&share_link_id=8AA3BC6B-4EBC-4FD4-8497-1F42FD99BA0A&share_app_id=1180" target="_blank">
                                 <img src="{{asset ('img/TIKTOK.PNG')}}" alt="">
                             </a>
                         </div>
-                </div>
         </div>
     </div>
 
