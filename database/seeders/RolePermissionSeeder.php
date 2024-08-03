@@ -36,12 +36,28 @@ class RolePermissionSeeder extends Seeder
             'name'=> 'super_admin'
         ]);
 
-        $user = User::create([
-            'name'=> 'Fajri',
-            'email' => 'fajri.hafizh99@gmail.com',
-            'password'=> bcrypt('191002'),
-        ]);
+        // Create users
+        $users = [
+            [
+                'name' => 'Fajri',
+                'email' => 'fajri.hafizh99@gmail.com',
+                'password' => bcrypt('191002'),
+            ],
+            [
+                'name' => 'Adnin',
+                'email' => 'adninfarizi12@gmail.com',
+                'password' => bcrypt('admin123'),
+            ],
+            [
+                'name' => 'Fabian',
+                'email' => 'ahmadfabiansyah@gmail.com',
+                'password' => bcrypt('admin123'),
+            ]
+        ];
 
-        $user->assignRole($superAdminRole);
+        foreach ($users as $userData) {
+            $user = User::create($userData);
+            $user->assignRole($superAdminRole);
+        }
     }
 }
