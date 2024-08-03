@@ -18,7 +18,7 @@
         <header class="mb-12">
             <div class="flex justify-center items-center">
                 <a href="{{ route('home') }}">
-                    <img src="{{ asset('img/Nerth black.png') }}" alt="Home Icon">
+                    <img src="{{ asset('img/Nerth_black.png') }}" alt="Home Icon">
                 </a>
             </div>
         </header>

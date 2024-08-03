@@ -20,34 +20,39 @@
 
 <body class="bg-cover bg-center h-screen" style="background-image: url('/img/product_bg.jpeg');">
 
-    <div class="m-24">
+    <div class="m-20">
         <div class="flex justify-between">
-            <h1 class="text-4xl font-bold">Nerth Studio</h1>
-            <h2 class="flex items-center">
-                Cart
-                <img src="" alt="">
-            </h2>
+            <a href="{{route ('home')}}">
+            <img src="{{asset('img/Nerth_black.png') }}" alt="Logo">
+            </img>
+                </a>
+            <div class="">
+                <x-cart>
+                </x-cart>
+            </div> 
         </div>
 
         <div class="flex">
-            <div class="w-1/2">
-                <h2 class="text-8xl font-bold mt-8">HOPE</h2>
-                <p class="text-lg mt-4">
+            <div class="w-1/2 ml-12">
+                <img src="{{asset ('img/HOPE.PNG')}}" alt="logo">
+                <p class="text-lg mt-4 font-bold">
                     Banyak harapan yang ada dipundak kita semua. Harapan orang-orang yang sebisa
                     mungkin harus kita usahakan meski hasil belum tentu sesuai dengan apa yang kita upayakan.
                 </p>
                 <div class="mt-8">
-                    <button class="bg-black text-white px-6 py-3 text-lg mr-4">Buy Now</button>
-                    <button class="border border-black px-6 py-3 text-lg">Add to Cart</button>
+                    <button class="rounded-lg bg-black text-white px-6 py-3 text-lg mr-4">Buy Now</button>
+                    <button class="rounded-lg bg-slate-50 border border-black px-6 py-3 text-lg">Select Size</button>
                 </div>
                 <p class="text-xl mt-4">Idr. 149.900,00,-</p>
+                <div class="mt-5">
+                    <button class="bg-zinc-400 rounded-lg text-white px-6 py-3 text-lg mr-4">Size Chart</button>
+                </div>
             </div>
-            <div class="w-1/2 relative">
-                <img src="{{ asset('img/tshirt.png') }}" alt="Hope T-shirt" class="w-full h-auto">
+            <div class="relative mr-72">
+                <img src="{{ asset('img/baju_hope.png') }}" alt="Hope T-shirt" class="w-full h-auto">
                 <div class="absolute top-80 right-20 bg-white px-4 py-2 text-sm">Only 20 Pieces Worldwide</div>
             </div>
         </div>
-
         <div class="flex mt-10 mb-20 justify-between">
             <div class="flex space-x-4">
                 <a href="https://www.tiktok.com" class="text-black">TikTok</a>
