@@ -195,12 +195,12 @@
                 </div>
                 <div class="form-group">
                     <div class="form-control">
-                        <label for="email">Email or phone number</label>
-                        <input type="text" id="email" name="email" placeholder="Email or phone number" required>
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="form-control">
-                        <label for="dob">Date of birth (MM/DD/YYYY)</label>
-                        <input type="date" id="dob" name="dob" required>
+                        <label for="birth_date">Date of birth (MM/DD/YYYY)</label>
+                        <input type="date" id="birth_date" name="birth_date" required>
                     </div>
                 </div>
                 <div class="form-group">

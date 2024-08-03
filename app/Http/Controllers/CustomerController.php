@@ -51,25 +51,19 @@ class CustomerController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers',
-            'dob' => 'required|date_format:m/d/Y',
+            'birth_date' => 'required|date_format:m/d/Y',
             'password' => 'required|string|confirmed|min:8',
         ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         Customer::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'birth_date' => $request->dob,
+            'birth_date' => $request->birth_date,
             'password' => Hash::make($request->password),
         ]);
 
