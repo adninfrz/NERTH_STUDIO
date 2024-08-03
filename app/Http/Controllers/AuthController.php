@@ -2,34 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auth;
 use Illuminate\Http\Request;
 
-class MainController extends Controller
+class AuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view ('index');
+        //
     }
 
-    public function about()
-    {
-        return view ('about');
-    }
-
-    public function product()
-    {
-        return view ('product');
-    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view ('auth.create-account');
     }
 
     /**
@@ -43,7 +35,7 @@ class MainController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Auth $auth)
     {
         //
     }
@@ -51,7 +43,7 @@ class MainController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Auth $auth)
     {
         //
     }
@@ -59,7 +51,7 @@ class MainController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Auth $auth)
     {
         //
     }
@@ -67,7 +59,7 @@ class MainController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Auth $auth)
     {
         //
     }
