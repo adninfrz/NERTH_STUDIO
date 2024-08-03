@@ -1,0 +1,29 @@
+.collection1 {
+    position: absolute;
+    left: 210px;
+    top: 340px;
+}
+
+.collection2 {
+    position: absolute;
+    left: 590px;
+    top: 450px;
+}
+
+.collection3 {
+    position: absolute;
+    left: 700px;
+    top: 380px;
+}
+
+.instagram {
+    position: absolute;
+    left: 700px;
+    top: 380px;
+}
+
+.tiktok {
+    position: absolute;
+    left: 700px;
+    top: 380px;
+}
