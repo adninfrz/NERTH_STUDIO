@@ -120,19 +120,23 @@
 
         <div class="collection1">
             <a href="{{ route('product') }}">
-                <img src="{{ asset('img/button.png') }}" alt=""
-                    class="hover:scale-125 transition-transform duration-500">
+                <button type="button"
+                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full"></button>
             </a>
         </div>
 
         <div class="collection2">
+            <a href="{{ route('product') }}">
             <button type="button"
                 class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full"></button>
+            </a>
         </div>
 
         <div class="collection3">
+            <a href="{{ route('product') }}">
             <button type="button"
                 class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full"></button>
+            </a>
         </div>
 
         <!-- Footer -->

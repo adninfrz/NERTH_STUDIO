@@ -40,10 +40,37 @@
                     Banyak harapan yang ada dipundak kita semua. Harapan orang-orang yang sebisa
                     mungkin harus kita usahakan meski hasil belum tentu sesuai dengan apa yang kita upayakan.
                 </p>
+                
                 <div class="mt-8">
                     <button class="rounded-lg bg-black text-white px-6 py-3 text-lg mr-4">Buy Now</button>
-                    <button class="rounded-lg bg-slate-50 border border-black px-6 py-3 text-lg">Select Size</button>
+                    <button id="selectSizeButton" class="rounded-lg bg-slate-50 border border-black px-6 py-3 text-lg">Select Size</button>
                 </div>
+            
+                <script>
+                    const selectSizeButton = document.getElementById('selectSizeButton');
+                    let isSizeOptionsVisible = false;
+            
+                    selectSizeButton.addEventListener('click', () => {
+                        if (!isSizeOptionsVisible) {
+                            selectSizeButton.innerHTML = `
+                                <div class="flex space-x-2">
+                                    <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">S</button>
+                                    <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">M</button>
+                                    <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">L</button>
+                                    <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">XL</button>
+                                </div>
+                            `;
+                            isSizeOptionsVisible = true;
+            
+                            document.querySelectorAll('.size-option').forEach(option => {
+                                option.addEventListener('click', (event) => {
+                                    selectSizeButton.textContent = event.target.textContent;
+                                    isSizeOptionsVisible = false;
+                                });
+                            });
+                        }
+                    });
+                </script>
                 <p class="text-xl mt-4">Idr. 149.900,00,-</p>
                 <div class="mt-5">
                     <button type="button"
