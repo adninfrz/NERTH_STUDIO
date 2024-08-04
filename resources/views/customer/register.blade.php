@@ -15,42 +15,54 @@
                 <h2>Create account</h2>
                 <p>For personal or business.</p>
             </div>
-            <form method="POST" action="{{ route('register') }}">
+
+            <form method="POST" action="{{ route('customer.register') }}">
                 @csrf
                 <div class="form-group">
                     <div class="form-control">
-                        <label for="first-name">First name</label>
-                        <input type="text" id="first-name" name="first_name" placeholder="First name" required>
+                        <x-input-label for="first_name" :value="__('First Name')" />
+                        <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
+                            :value="old('first_name')" required autofocus autocomplete="first_name" />
+                        <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
                     </div>
                     <div class="form-control">
-                        <label for="last-name">Last name</label>
-                        <input type="text" id="last-name" name="last_name" placeholder="Last name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-control">
-                        <label for="email">Email</label>
-                        <input type="text" id="email" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-control">
-                        <label for="birth_date">Date of birth</label>
-                        <input type="date" id="birth_date" name="birth_date" required>
+                        <x-input-label for="last_name" :value="__('Last Name')" />
+                        <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                            :value="old('last_name')" required autofocus autocomplete="last_name" />
+                        <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="form-control">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
+                            :value="old('email')" required autocomplete="email" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="form-control">
-                        <label for="confirm-password">Confirm password</label>
-                        <input type="password" id="confirm-password" name="password_confirmation"
-                            placeholder="Confirm password" required>
+                        <x-input-label for="birth_date" :value="__('Date of Birth')" />
+                        <x-text-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date"
+                            :value="old('birth_date')" required autocomplete="birth_date" />
+                        <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        <x-input-label for="password" :value="__('Password')" />
+                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                            autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
+                    <div class="form-control">
+                        <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                            name="password_confirmation" required autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
                 </div>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="terms-privacy" name="terms-privacy" required>
-                    <label for="terms-privacy">
+                    <input type="checkbox" id="terms_privacy" name="terms_privacy" required>
+                    <label for="terms_privacy">
                         I agree to all the
                         <a href="#" style="color: gray">Terms</a>
                         and
@@ -67,7 +79,7 @@
             </form>
 
             <div class="form-footer">
-                <p>Already have an account? <a href="{{ route('customer.login.page') }}">Log In</a></p>
+                <p>Already have an account? <a href="{{ route('customer.login') }}">Log In</a></p>
             </div>
         </div>
     </div>

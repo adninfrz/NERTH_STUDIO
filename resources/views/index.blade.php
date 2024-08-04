@@ -90,7 +90,8 @@
                                     class="w-full text-white bg-stone-700 hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login
                                     Now</button>
                                 <div class="text-sm font-medium text-gray-500">
-                                    Not registered? <a href="" class="text-blue-700 hover:underline">Create
+                                    Not registered? <a href="{{ route('customer.register') }}"
+                                        class="text-blue-700 hover:underline">Create
                                         account</a>
                                 </div>
                             </form>

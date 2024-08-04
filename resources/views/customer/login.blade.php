@@ -27,7 +27,7 @@
             </form>
 
             <div class="form-footer">
-                <p>Not Registered? <a href="{{ route('customer.register.page') }}">Create Account</a></p>
+                <p>Not Registered? <a href="{{ route('customer.register') }}">Create Account</a></p>
             </div>
         </div>
     </div>

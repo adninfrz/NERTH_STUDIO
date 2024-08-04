@@ -15,7 +15,7 @@ class Cart extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'customer_id',
+        'user_id',
         'product_id',
     ];
 
@@ -24,7 +24,7 @@ class Cart extends Model
      */
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -21,16 +21,23 @@
                     @method('PUT')
 
                     <div class="mb-6">
-                        <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
-                            :value="old('name', $product->name)" required autofocus autocomplete="name" />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <x-input-label for="title" :value="__('Title')" />
+                        <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
+                            :value="old('title', $product->title)" required autofocus autocomplete="title" />
+                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                    </div>
+
+                    <div class="mb-6">
+                        <x-input-label for="slug" :value="__('Slug')" />
+                        <x-text-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                            :value="old('slug', $product->slug)" required autofocus autocomplete="slug" />
+                        <x-input-error :messages="$errors->get('slug')" class="mt-2" />
                     </div>
 
                     <div class="mb-6">
                         <x-input-label for="image" :value="__('Image')" />
                         <div class="mb-2">
-                            <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
+                            <img src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}"
                                 class="rounded-2xl object-cover w-[90px] h-[90px]">
                         </div>
                         <x-text-input id="image" class="block mt-1 w-full" type="file" name="image" />
@@ -38,9 +45,10 @@
                     </div>
 
                     <div class="mb-6">
-                        <x-input-label for="size_chart" :value="__('Size Chart')" />
-                        <x-text-input id="size_chart" class="block mt-1 w-full" type="file" name="size_chart" />
-                        <x-input-error :messages="$errors->get('size_chart')" class="mt-2" />
+                        <x-input-label for="price" :value="__('Price')" />
+                        <x-text-input id="price" class="block mt-1 w-full" type="text" name="price"
+                            :value="old('price', $product->price)" />
+                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
                     </div>
 
                     <div class="mb-6">
@@ -50,10 +58,13 @@
                     </div>
 
                     <div class="mb-6">
-                        <x-input-label for="price" :value="__('Price')" />
-                        <x-text-input id="price" class="block mt-1 w-full" type="text" name="price"
-                            :value="old('price', $product->price)" />
-                        <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                        <x-input-label for="background" :value="__('Background')" />
+                        <div class="mb-2">
+                            <img src="{{ Storage::url($product->background) }}" alt="{{ $product->title }}"
+                                class="rounded-2xl object-cover w-[90px] h-[90px]">
+                        </div>
+                        <x-text-input id="background" class="block mt-1 w-full" type="file" name="background" />
+                        <x-input-error :messages="$errors->get('background')" class="mt-2" />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

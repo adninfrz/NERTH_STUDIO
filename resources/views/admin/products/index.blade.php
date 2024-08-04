@@ -19,7 +19,7 @@
                         <tr>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Name
+                                Title
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -27,7 +27,11 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Size Chart
+                                Background
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Size
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -47,15 +51,29 @@
                         @foreach ($products as $product)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $product->name }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $product->title }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
+                                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->title }}"
                                         class="w-16 h-16 object-cover rounded">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="{{ Storage::url($product->size_chart) }}" alt="{{ $product->name }}"
+                                    <img src="{{ Storage::url($product->background) }}" alt="{{ $product->title }}"
                                         class="w-16 h-16 object-cover rounded">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @php
+                                        $colorClass = match ($product->select_size) {
+                                            'S' => 'bg-red-500 rounded',
+                                            'M' => 'bg-yellow-500 rounded',
+                                            'L' => 'bg-green-500 rounded',
+                                            'XL' => 'bg-blue-500 rounded',
+                                            default => 'text-gray-900',
+                                        };
+                                    @endphp
+                                    <div class="text-sm text-white font-medium p-1 text-center {{ $colorClass }}">
+                                        {{ $product->select_size }}
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500">
                                     {{ Str::limit(strip_tags($product->description), 250) }}
