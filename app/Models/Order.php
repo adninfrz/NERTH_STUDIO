@@ -16,17 +16,13 @@ class Order extends Model
      */
     protected $fillable = [
         'customer_id',
-        'order_date',
         'total_amount',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'order_date' => 'datetime',
+        'address',
+        'city',
+        'post_code',
+        'phone',
+        'note',
+        'payment',
     ];
 
     /**
@@ -35,13 +31,5 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
-    }
-
-    /**
-     * Get the products for the order.
-     */
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity', 'price');
     }
 }

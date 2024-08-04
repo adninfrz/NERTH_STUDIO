@@ -16,6 +16,7 @@ class Cart extends Model
      */
     protected $fillable = [
         'customer_id',
+        'product_id',
     ];
 
     /**
@@ -31,6 +32,6 @@ class Cart extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'cart_product')->withPivot('quantity');
+        return $this->belongsTo(Product::class);
     }
 }

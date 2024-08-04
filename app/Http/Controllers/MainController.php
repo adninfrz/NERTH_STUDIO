@@ -17,7 +17,7 @@ class MainController extends Controller
      */
     public function about()
     {
-        return view('about');
+        return view('main.about');
     }
 
     /**
@@ -25,6 +25,6 @@ class MainController extends Controller
      */
     public function product()
     {
-        return view('product');
+        return view('main.product');
     }
 }

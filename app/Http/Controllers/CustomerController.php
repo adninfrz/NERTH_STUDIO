@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\CustomerUpdateRequest;
 
 class CustomerController extends Controller
 {
@@ -20,57 +22,50 @@ class CustomerController extends Controller
         return view('admin.customers.index', compact('customers'));
     }
 
-    public function loginPage()
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): View
     {
-        return view('customer-login');
+        return view('customer.profile.edit', [
+            'user' => $request->user(),
+        ]);
     }
 
     /**
-     * Handle login.
+     * Update the user's profile information.
      */
-    public function login(Request $request)
+    public function update(CustomerUpdateRequest $request): RedirectResponse
     {
-        return redirect()->route('customer.login');
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('customer.profile.edit')->with('status', 'profile-updated');
     }
 
     /**
-     * Handle logout.
+     * Delete the user's account.
      */
-    public function logout()
+    public function destroy(Request $request): RedirectResponse
     {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
         Auth::logout();
-        return redirect()->route('home')->with('status', 'Logged out successfully!');
-    }
 
-    /**
-     * Show the registration form.
-     */
-    public function registerPage()
-    {
-        return view('customer-register');
-    }
+        $user->delete();
 
-    /**
-     * Handle registration.
-     */
-    public function register(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:customers',
-            'birth_date' => 'required|date_format:m/d/Y',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        Customer::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'birth_date' => $request->birth_date,
-            'password' => Hash::make($request->password),
-        ]);
-
-        return redirect()->route('home')->with('status', 'Registration successful!');
+        return Redirect::to('/');
     }
 }

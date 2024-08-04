@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->dateTime('order_date');
-            $table->string('total_amount');
+            $table->unsignedBigInteger('total_amount');
+            $table->string('address');
+            $table->string('city');
+            $table->string('post_code');
+            $table->string('phone');
+            $table->string('note')->nullable();
+            $table->string('payment');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
