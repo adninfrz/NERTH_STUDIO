@@ -20,6 +20,10 @@ class CustomerController extends Controller
         return view('admin.customers.index', compact('customers'));
     }
 
+    public function loginPage()
+    {
+        return view('customer-login');
+    }
 
     /**
      * Handle login.

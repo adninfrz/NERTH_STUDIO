@@ -18,6 +18,7 @@ Route::get('/product', [MainController::class, 'product'])->name('product');
 // Authentication Routes
 Route::get('/customer/register', [CustomerController::class, 'registerPage'])->name('customer.register.page');
 Route::post('/customer/register', [CustomerController::class, 'register'])->name('customer.register');
+Route::get('/customer/login/puki', [CustomerController::class, 'loginPage'])->name('customer.login.page');
 Route::get('/customer/login', [CustomerController::class, 'login'])->name('customer.login');
 Route::post('/customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
 

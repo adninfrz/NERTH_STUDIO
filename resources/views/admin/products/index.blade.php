@@ -4,34 +4,41 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Manage Products') }}
             </h2>
-            <a href="{{ route('admin.products.create') }}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
+            <a href="{{ route('admin.products.create') }}"
+                class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                 Add Products
             </a>
         </div>
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-10">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Name
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Image
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Size Chart
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Description
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Price
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Actions
                             </th>
                         </tr>
@@ -43,19 +50,27 @@
                                     <div class="text-sm font-medium text-gray-900">{{ $product->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="{{ $product->image }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
+                                        class="w-16 h-16 object-cover rounded">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="{{ $product->size_chart }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover rounded">
+                                    <img src="{{ Storage::url($product->size_chart) }}" alt="{{ $product->name }}"
+                                        class="w-16 h-16 object-cover rounded">
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${{ $product->description }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${{ $product->price }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    {{ Str::limit(strip_tags($product->description), 250) }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $product->price }}
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('products.edit', $product->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline-block">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}"
+                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
+                                        class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
+                                        <button type="submit"
+                                            class="text-red-600 hover:text-red-900 ml-4">Delete</button>
                                     </form>
                                 </td>
                             </tr>
