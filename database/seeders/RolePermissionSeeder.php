@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Customer;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -14,32 +13,35 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create roles with the appropriate guard name
         $adminRole = Role::create([
             'name' => 'admin',
-            'guard_name' => 'web',
         ]);
 
         $customerRole = Role::create([
             'name' => 'customer',
-            'guard_name' => 'customer',
         ]);
 
         $users = [
             [
-                'name' => 'Fajri',
+                'first_name' => 'Fajri',
+                'last_name' => 'Hafizh',
+                'birth_date' => '19-10-2002',
                 'email' => 'fajri.hafizh99@gmail.com',
                 'password' => bcrypt('191002'),
                 'role' => $adminRole,
             ],
             [
-                'name' => 'Adnin',
+                'first_name' => 'Adnin',
+                'last_name' => 'Farizi',
+                'birth_date' => '10-10-2002',
                 'email' => 'adninfarizi12@gmail.com',
                 'password' => bcrypt('admin123'),
                 'role' => $adminRole,
             ],
             [
-                'name' => 'Fabian',
+                'first_name' => 'Ahmad',
+                'last_name' => 'Fabiansyah',
+                'birth_date' => '10-10-2002',
                 'email' => 'ahmadfabiansyah@gmail.com',
                 'password' => bcrypt('admin123'),
                 'role' => $adminRole,
@@ -48,7 +50,9 @@ class RolePermissionSeeder extends Seeder
 
         foreach ($users as $userData) {
             $user = User::create([
-                'name' => $userData['name'],
+                'first_name' => $userData['first_name'],
+                'last_name' => $userData['last_name'],
+                'birth_date' => $userData['birth_date'],
                 'email' => $userData['email'],
                 'password' => $userData['password'],
             ]);
@@ -57,4 +61,3 @@ class RolePermissionSeeder extends Seeder
         }
     }
 }
-

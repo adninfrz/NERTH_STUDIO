@@ -34,7 +34,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Load routes from customer.php
-Route::group([], base_path('routes/customer.php'));
-
 require __DIR__.'/auth.php';

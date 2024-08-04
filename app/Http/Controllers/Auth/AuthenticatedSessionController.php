@@ -19,6 +19,11 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function customerCreate(): View
+    {
+        return view('customer.login');
+    }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -29,6 +34,15 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard', absolute: false));
+    }
+
+    public function customerStore(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('home', absolute: false));
     }
 
     /**
