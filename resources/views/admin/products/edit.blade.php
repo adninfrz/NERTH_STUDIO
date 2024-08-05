@@ -30,7 +30,7 @@
                     <div class="mb-6">
                         <x-input-label for="slug" :value="__('Slug')" />
                         <x-text-input id="slug" class="block mt-1 w-full" type="text" name="slug"
-                            :value="old('slug', $product->slug)" required autofocus autocomplete="slug" />
+                            :value="old('slug', $product->slug)" required readonly />
                         <x-input-error :messages="$errors->get('slug')" class="mt-2" />
                     </div>
 
@@ -77,4 +77,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('title').addEventListener('input', function() {
+            let title = this.value;
+            let slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            document.getElementById('slug').value = slug;
+        });
+    </script>
 </x-app-layout>

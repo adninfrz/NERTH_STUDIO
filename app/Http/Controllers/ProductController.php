@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view("admin.products.index", compact('products'));
+
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -31,15 +33,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'size_chart' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'description' => 'required|string',
             'price' => 'required|numeric',
+            'description' => 'required|string',
+            'background' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $product = new Product;
-        $product->name = $request->name;
+        $product->title = $request->title;
+        $product->slug = Str::slug($request->title);
         $product->description = $request->description;
         $product->price = $request->price;
 
@@ -47,8 +50,8 @@ class ProductController extends Controller
             $product->image = $request->file('image')->store('images', 'public');
         }
 
-        if ($request->hasFile('size_chart')) {
-            $product->size_chart = $request->file('size_chart')->store('size_charts', 'public');
+        if ($request->hasFile('background')) {
+            $product->background = $request->file('background')->store('background', 'public');
         }
 
         $product->save();
@@ -78,14 +81,15 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'size_chart' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
-            'description' => 'required|string',
             'price' => 'required|numeric',
+            'description' => 'required|string',
+            'background' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $product->name = $request->name;
+        $product->title = $request->title;
+        $product->slug = Str::slug($request->title);
         $product->description = $request->description;
         $product->price = $request->price;
 
@@ -96,11 +100,11 @@ class ProductController extends Controller
             $product->image = $request->file('image')->store('images', 'public');
         }
 
-        if ($request->hasFile('size_chart')) {
-            if ($product->size_chart) {
-                Storage::disk('public')->delete($product->size_chart);
+        if ($request->hasFile('background')) {
+            if ($product->background) {
+                Storage::disk('public')->delete($product->background);
             }
-            $product->size_chart = $request->file('size_chart')->store('size_charts', 'public');
+            $product->background = $request->file('background')->store('background', 'public');
         }
 
         $product->save();
@@ -117,8 +121,8 @@ class ProductController extends Controller
             Storage::disk('public')->delete($product->image);
         }
 
-        if ($product->size_chart) {
-            Storage::disk('public')->delete($product->size_chart);
+        if ($product->background) {
+            Storage::disk('public')->delete($product->background);
         }
 
         $product->delete();

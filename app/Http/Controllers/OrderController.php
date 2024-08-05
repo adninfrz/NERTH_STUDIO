@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -12,7 +13,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        if($user->hasRole('customer')){
+            $orders = $user->orders()->orderBy('id', 'DESC')->get();
+        }
+        else {
+            $orders = Order::orderBy('id', 'DESC')->get();
+        }
+
+        return view('admin.orders.index', [
+            'orders' => $orders
+        ]);
     }
 
     /**
@@ -36,7 +48,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $order = Order::with('orderDetails')->find($order->id);
+
+        return view('admin.orders.details', compact('order'));
     }
 
     /**
@@ -52,7 +66,11 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->update([
+            'status' => true
+        ]);
+
+        return redirect()->back();
     }
 
     /**

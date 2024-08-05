@@ -9,6 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

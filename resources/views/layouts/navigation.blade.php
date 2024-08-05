@@ -16,13 +16,15 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
-                        {{ __('Orders') }}
+                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                        {{ Auth::user()->hasRole('admin') ? __('Customer Orders') : __('My Orders') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                        {{ __('Products') }}
-                    </x-nav-link>
+                    @role('admin')
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
+                            {{ __('Products') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

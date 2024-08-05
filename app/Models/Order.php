@@ -9,6 +9,10 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,13 +27,19 @@ class Order extends Model
         'phone',
         'note',
         'payment',
+        'status'
     ];
 
     /**
      * Get the customer that owns the order.
      */
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

@@ -31,10 +31,6 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Size
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Description
                             </th>
                             <th scope="col"
@@ -60,20 +56,6 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <img src="{{ Storage::url($product->background) }}" alt="{{ $product->title }}"
                                         class="w-16 h-16 object-cover rounded">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @php
-                                        $colorClass = match ($product->select_size) {
-                                            'S' => 'bg-red-500 rounded',
-                                            'M' => 'bg-yellow-500 rounded',
-                                            'L' => 'bg-green-500 rounded',
-                                            'XL' => 'bg-blue-500 rounded',
-                                            default => 'text-gray-900',
-                                        };
-                                    @endphp
-                                    <div class="text-sm text-white font-medium p-1 text-center {{ $colorClass }}">
-                                        {{ $product->select_size }}
-                                    </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500">
                                     {{ Str::limit(strip_tags($product->description), 250) }}

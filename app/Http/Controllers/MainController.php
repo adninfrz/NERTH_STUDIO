@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+
 class MainController extends Controller
 {
     /**
@@ -21,10 +23,14 @@ class MainController extends Controller
     }
 
     /**
-     * Display the product page.
+     * Display the product page based on slug.
      */
-    public function product()
+    public function product($slug)
     {
-        return view('main.product');
+        // Mengambil produk berdasarkan slug
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        // Menampilkan tampilan dengan data produk
+        return view('main.product', compact('product'));
     }
 }
