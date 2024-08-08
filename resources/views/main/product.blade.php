@@ -4,9 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Product {{ $product->title }} | Nerth Studio</title>
-
     <link rel="shortcut icon" href="favicon.ico" type="img/logo.png">
 
     <!-- Fonts -->
@@ -26,28 +24,40 @@
         <div class="flex justify-between">
             <a href="{{ route('home') }}">
                 <img src="{{ asset('img/Nerth_black.png') }}" alt="Logo">
-                </img>
             </a>
-            <div class="">
+            <div class="cart">
                 <button class="font-medium text-xl px-5 py-2.5 mb-2" type="button" data-drawer-target="drawer-right"
                     data-drawer-show="drawer-right" data-drawer-placement="right" aria-controls="drawer-right">
-                    <img src="{{ asset('img/cart(0)_icon.png') }}" alt="logo">
+                    <p class="text-outline">CART (<span id="cart-count">0</span>)</p>
                 </button>
 
                 <!-- Cart Details -->
                 <div id="drawer-right"
                     class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-96"
                     tabindex="-1" aria-labelledby="drawer-right-label">
-                    <h5 id="drawer-right-label"
-                        class="inline-flex items-center mb-4 text-base font-semibold text-gray-500">
-                        CART (<span id="cart-count">0</span>)
-                    </h5>
+                    <div class="flex justify-between my-5">
+                        <button type="button" data-drawer-hide="drawer-right" aria-controls="drawer-right"
+                            class="mb-4">
+                            <h5 class="text-base font-semibold text-gray-500">CLOSE</h5>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h5 id="drawer-right-label" class="text-base font-semibold text-gray-500">CART (<span
+                                id="drawer-cart-count">0</span>)</h5>
+                    </div>
                     <div id="cart-items" class="space-y-4">
                         <!-- Cart items will be dynamically added here -->
                     </div>
+                    <div class="my-4 text-right">
+                        <span class="text-xl font-bold">Total: Idr. <span id="total-price">0</span></span>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-black py-2 px-8 rounded">
+                            <h5 class="text-base font-semibold text-white">CHECK OUT</h5>
+                        </button>
+                    </div>
                     <div
-                        class="mt-24 rounded-lg py-3 px-3 flex flex-row gap-x-2 justify-evenly bg-gray-300 items-center">
-                        <a class="" href="https://shopee.co.id/shop/794956777?is_from_login=true">
+                        class="mt-8 rounded-lg py-3 px-3 flex flex-row gap-x-2 justify-evenly bg-gray-300 items-center">
+                        <a href="https://shopee.co.id/shop/794956777?is_from_login=true">
                             <img src="{{ asset('img/shope.png') }}" alt="Shopee Logo" class="w-12 h-12">
                         </a>
                         <h1 class="text-xl font-bold text-gray-800">or</h1>
@@ -55,15 +65,6 @@
                             <img src="{{ asset('img/tokopedia.png') }}" alt="Tokopedia Logo" class="w-12 h-12">
                         </a>
                     </div>
-                    <button type="button" data-drawer-hide="drawer-right" aria-controls="drawer-right"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close</span>
-                    </button>
                 </div>
             </div>
         </div>
@@ -71,23 +72,19 @@
 
     <div class="flex">
         <div class="w-1/2 ml-12">
-            <h3 class="text-9xl font-bold">
-                {{ $product->title }}
-            </h3>
-            <p class="text-lg mt-4 font-bold text-justify">
-                {{ $product->description }}
-            </p>
+            <h3 class="text-9xl font-bold">{{ $product->title }}</h3>
+            <p class="text-lg mt-4 font-bold text-justify">{{ $product->description }}</p>
 
-            <div class="mt-8">
+            <div class="mt-8 flex space-x-4">
                 <form id="add-to-cart-form">
                     @csrf
-                    <button id="add-to-cart" type="button"
-                        class="rounded-lg bg-black text-white px-6 py-3 text-lg mr-4">
+                    <button id="add-to-cart" type="button" class="rounded-lg bg-black text-white px-6 py-3 text-lg">
                         Add to Cart
                     </button>
                 </form>
-                <button id="selectSizeButton"
-                    class="rounded-lg bg-slate-50 border border-black px-6 py-3 text-lg">Select Size</button>
+                <button id="selectSizeButton" class="rounded-lg bg-slate-50 border border-black px-6 py-3 text-lg">
+                    Select Size
+                </button>
             </div>
 
             <p class="text-xl mt-4">Idr. {{ number_format($product->price, 0, ',', '.') }}-</p>
@@ -114,7 +111,6 @@
             <a href="https://www.tiktok.com" class="text-black">TikTok</a>
             <a href="https://www.instagram.com" class="text-black">Instagram</a>
         </div>
-
         <div>
             <p>&copy; 2024 Nerth Studio. All rights reserved.</p>
         </div>
@@ -123,22 +119,24 @@
     <script>
         const selectSizeButton = document.getElementById('selectSizeButton');
         let isSizeOptionsVisible = false;
+        let selectedSize = null;
 
         selectSizeButton.addEventListener('click', () => {
             if (!isSizeOptionsVisible) {
                 selectSizeButton.innerHTML = `
-                        <div class="flex space-x-2">
-                            <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">S</button>
-                            <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">M</button>
-                            <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">L</button>
-                            <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">XL</button>
-                        </div>
-                    `;
+                    <div class="flex space-x-2">
+                        <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">S</button>
+                        <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">M</button>
+                        <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">L</button>
+                        <button class="size-option px-2 py-1 bg-slate-50 border border-black rounded-lg hover:bg-gray-200 active:bg-gray-300">XL</button>
+                    </div>
+                `;
                 isSizeOptionsVisible = true;
 
                 document.querySelectorAll('.size-option').forEach(option => {
                     option.addEventListener('click', (event) => {
-                        selectSizeButton.textContent = event.target.textContent;
+                        selectedSize = event.target.textContent;
+                        selectSizeButton.textContent = `Size: ${selectedSize}`;
                         isSizeOptionsVisible = false;
                     });
                 });
@@ -146,24 +144,41 @@
         });
 
         document.getElementById('add-to-cart').addEventListener('click', () => {
+            if (!selectedSize) {
+                alert('Please select a size first');
+                return;
+            }
+
             const cartItems = document.getElementById('cart-items');
-            const cartCount = document.getElementById('cart-count');
+            const cartCount = document.querySelectorAll('#cart-count, #drawer-cart-count');
+            const totalPriceElement = document.getElementById('total-price');
             const itemTitle = '{{ $product->title }}';
-            const itemPrice = '{{ number_format($product->price, 0, ',', '.') }}';
+            const itemPrice = parseInt('{{ $product->price }}', 10);
 
-            // Add new item to the cart
-            const newItem = document.createElement('div');
-            newItem.className = 'max-w-sm rounded overflow-hidden shadow-lg bg-white';
-            newItem.innerHTML = `<img class="w-full" src="{{ Storage::url($product->image) }}" alt="${itemTitle}">
-                <div class="flex flex-row justify-between px-6 py-4 text-center bg-gray-200">
-                    <div class="text-gray-800 text-lg">${itemTitle} (L)</div>
-                    <div class="text-gray-800 text-lg font-semibold">Idr. ${itemPrice}</div>
-                </div>`;
+            let existingCartItem = document.querySelector(`#cart-items .cart-item[data-size="${selectedSize}"]`);
+            if (existingCartItem) {
+                let quantityElement = existingCartItem.querySelector('.quantity');
+                let currentQuantity = parseInt(quantityElement.textContent, 10);
+                quantityElement.textContent = currentQuantity + 1;
+                let itemTotalPriceElement = existingCartItem.querySelector('.item-total-price');
+                itemTotalPriceElement.textContent = itemPrice * (currentQuantity + 1);
+            } else {
+                const newItem = document.createElement('div');
+                newItem.className = 'max-w-sm rounded overflow-hidden shadow-lg bg-white cart-item';
+                newItem.dataset.size = selectedSize;
+                newItem.innerHTML = `
+                    <img class="w-full" src="{{ Storage::url($product->image) }}" alt="${itemTitle}">
+                    <div class="flex flex-row justify-between px-6 py-4 text-center bg-gray-200">
+                        <div class="text-gray-800 text-lg">${itemTitle} #<span class="quantity">1</span> (${selectedSize})</div>
+                        <div class="text-gray-800 text-lg font-semibold">Idr. <span class="item-total-price">${itemPrice}</span></div>
+                    </div>`;
+                cartItems.appendChild(newItem);
+            }
 
-            cartItems.appendChild(newItem);
-
-            // Update cart count
-            cartCount.textContent = parseInt(cartCount.textContent) + 1;
+            // Update cart count and total price
+            cartCount.forEach(count => count.textContent = parseInt(count.textContent) + 1);
+            let currentTotalPrice = parseInt(totalPriceElement.textContent.replace(/\./g, ''), 10);
+            totalPriceElement.textContent = (currentTotalPrice + itemPrice).toLocaleString('id-ID');
 
             // Show the drawer
             const drawer = document.getElementById('drawer-right');

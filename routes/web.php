@@ -12,6 +12,11 @@ Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 Route::get('/product/{slug}', [MainController::class, 'product'])->name('product');
 
+Route::get('/cart', [MainController::class, 'cart'])->name('cart');
+Route::post('/add-to-cart/{id}', [MainController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('/update-cart', [MainController::class, 'updateCart'])->name('update.cart');
+Route::delete('/remove-from-cart', [MainController::class, 'removeFromCart'])->name('remove.from.cart');
+
 // Dashboard Route
 Route::get('/dashboard', function () {
     return view('dashboard');

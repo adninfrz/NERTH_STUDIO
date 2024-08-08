@@ -81,7 +81,7 @@
             <div>
                 <h2 class="text-2xl font-semibold">Recent Collection</h2>
                 <p class="mt-4">Stay informed with our latest updates</p>
-                <a href="{{ route('product') }}">
+                <a href="">
                     <button class="w-48 mt-6 p-2 bg-black text-white rounded-md">Read More</button>
                 </a>
             </div>

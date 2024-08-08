@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nerth Studio</title>
+    <title>Cart | Nerth Studio</title>
     <link rel="shortcut icon" href="favicon.ico" type="img/logo.png">
 
     <!-- Fonts -->
@@ -18,19 +18,24 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-cover bg-center h-screen flex flex-col" style="background-image: url('/img/background.png');">
+<body class="bg-gray-100 h-screen">
 
-    <div class="container mx-auto flex-grow">
+    <div class="container mx-auto mt-10">
 
         <header>
             <!-- Navigation -->
             <nav class="flex justify-between my-8">
+                <div class="back">
+                    <a class="font-medium text-xl px-5 py-2.5 text-outline" href="{{ route('home') }}">
+                        BACK
+                    </a>
+                </div>
                 <div class="login">
                     @auth
                         <button class="font-medium text-xl px-5 py-2.5" type="button" data-modal-target="logout-modal"
                             data-modal-toggle="logout-modal">
                             <p class="text-outline">
-                                Welcome, {{ Auth::user()->first_name }}
+                                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                 @if (Auth::user()->hasRole('admin'))
                                     (admin)
                                 @endif
@@ -42,49 +47,6 @@
                             <p class="text-outline">LOGIN</p>
                         </button>
                     @endauth
-                </div>
-                <div class="cart">
-                    <button class="font-medium text-xl px-5 py-2.5" type="button" data-drawer-target="drawer-right"
-                        data-drawer-show="drawer-right" data-drawer-placement="right" aria-controls="drawer-right">
-                        <p class="text-outline">
-                            CART (<span id="cart-count">0</span>)
-                        </p>
-                    </button>
-                    <!-- Cart Details -->
-                    <div id="drawer-right"
-                        class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-96"
-                        tabindex="-1" aria-labelledby="drawer-right-label">
-                        <div class="flex justify-between my-5">
-                            <button type="button" data-drawer-hide="drawer-right" aria-controls="drawer-right"
-                                class="mb-4">
-                                <h5 class="text-base font-semibold text-gray-500">CLOSE</h5>
-                                <span class="sr-only">Close</span>
-                            </button>
-                            <h5 id="drawer-right-label" class="text-base font-semibold text-gray-500">CART (<span
-                                    id="drawer-cart-count">0</span>)</h5>
-                        </div>
-                        <div id="cart-items" class="space-y-4">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
-                        <div class="my-4 text-right">
-                            <span class="text-xl font-bold">Total: Idr. <span id="total-price">0</span></span>
-                        </div>
-                        <div class="text-center">
-                            <button type="button" href="{{ route('cart') }}" class="bg-black py-4 px-10 rounded">
-                                <h5 class="text-base font-semibold text-white">CHECK OUT</h5>
-                            </button>
-                        </div>
-                        <div
-                            class="mt-8 rounded-lg py-3 px-3 flex flex-row gap-x-2 justify-evenly bg-gray-300 items-center">
-                            <a href="https://shopee.co.id/shop/794956777?is_from_login=true">
-                                <img src="{{ asset('img/shope.png') }}" alt="Shopee Logo" class="w-12 h-12">
-                            </a>
-                            <h1 class="text-xl font-bold text-gray-800">or</h1>
-                            <a href="https://tokopedia.com">
-                                <img src="{{ asset('img/tokopedia.png') }}" alt="Tokopedia Logo" class="w-12 h-12">
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </nav>
 
@@ -169,61 +131,113 @@
             </section>
         </header>
 
-        <section class="product flex justify-around my-8">
-            <!-- Collection Buttons -->
-            <div class="collection1">
-                <a href="{{ route('product', ['slug' => 'hope']) }}">
-                    <button type="button"
-                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full"></button>
-                </a>
-            </div>
-
-            <div class="collection2">
-                <a href="{{ route('product', ['slug' => 'scrf']) }}">
-                    <button type="button"
-                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full"></button>
-                </a>
-            </div>
-
-            <div class="collection3">
-                <a href="{{ route('product', ['slug' => 'fbdr']) }}">
-                    <button type="button"
-                        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 size-5 hover:scale-125 transition-transform duration-500 rounded-full"></button>
-                </a>
-            </div>
+        <section class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-6">Your Cart</h2>
+            @if (session('cart'))
+                <div class="mb-6">
+                    @foreach (session('cart') as $id => $details)
+                        <div class="flex items-center justify-between mb-4 p-4 bg-gray-50 rounded-lg">
+                            <img src="{{ Storage::url($details['image']) }}" alt="{{ $details['name'] }}"
+                                class="w-16 h-16 rounded-lg">
+                            <div class="flex-1 ml-4">
+                                <h3 class="text-lg font-semibold">{{ $details['name'] }}</h3>
+                                <p class="text-gray-600">Size: {{ $details['size'] }}</p>
+                                <div class="flex items-center mt-2">
+                                    <button class="px-2 py-1 bg-gray-300 text-gray-600 rounded"
+                                        onclick="decreaseQuantity('{{ $id }}')">-</button>
+                                    <span class="mx-2 quantity"
+                                        data-id="{{ $id }}">{{ $details['quantity'] }}</span>
+                                    <button class="px-2 py-1 bg-gray-300 text-gray-600 rounded"
+                                        onclick="increaseQuantity('{{ $id }}')">+</button>
+                                </div>
+                            </div>
+                            <div class="text-lg font-semibold">Idr.
+                                {{ number_format($details['price'] * $details['quantity'], 0, ',', '.') }}</div>
+                            <button class="ml-4 text-red-600" onclick="removeFromCart('{{ $id }}')">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-xl font-semibold">
+                        Total: Idr.
+                        {{ number_format(
+                            array_sum(
+                                array_map(function ($details) {
+                                    return $details['price'] * $details['quantity'];
+                                }, session('cart')),
+                            ),
+                            0,
+                            ',',
+                            '.',
+                        ) }}
+                    </div>
+                    <a href="{{ route('checkout') }}" class="px-6 py-2 bg-black text-white rounded-lg">Proceed to
+                        Checkout</a>
+                </div>
+            @else
+                <p class="text-gray-600">Your cart is empty.</p>
+            @endif
         </section>
 
     </div>
 
-    <!-- Footer -->
-    <footer class="my-8 mt-auto">
-        <div class="container mx-auto flex justify-between">
-            <a href="{{ route('about') }}">
-                <p class="text-outline font-medium text-xl px-5 py-2.5">EXTRAS</p>
-            </a>
-            <a href="https://wa.me/087723050090" target="_blank">
-                <p class="text-outline font-medium text-xl px-5 py-2.5">CUSTOMER SERVICE</p>
-            </a>
-            <button type="button" data-modal-target="authentication-social"
-                data-modal-toggle="authentication-social">
-                <p class="text-outline font-medium text-xl px-5 py-2.5">SOCIAL</p>
-            </button>
-        </div>
-        <div id="authentication-social" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full bg-black/10">
-            <div class="instagram">
-                <a href="https://www.instagram.com/nerth.studio/" target="_blank">
-                    <img src="{{ asset('img/INSTAGRAM.PNG') }}" alt="">
-                </a>
-            </div>
-            <div class="tiktok">
-                <a href="https://www.tiktok.com/@nerth.studio?_r=1&_d=e4a27c4jjlg5c5&sec_uid=MS4wLjABAAAAdXwlrKEBbgz5IvCyQtHLFL0TyU5JEC2elnciv_N4My-GMIW6qJOObkfJpbHTHacJ&share_author_id=7223085511085458458&sharer_language=en&source=h5_t&u_code=dak532ij94m864&ug_btm=b6880,b5836&sec_user_id=MS4wLjABAAAA_cClL3-PkHQ76W4nidWkbGc__8USWs19n_ue7_IRNBwep2LzkAxnR5oNq6wE1oBa&utm_source=copy&social_share_type=5&utm_campaign=client_share&utm_medium=ios&tt_from=copy&user_id=6790887901447439361&enable_checksum=1&share_link_id=8AA3BC6B-4EBC-4FD4-8497-1F42FD99BA0A&share_app_id=1180"
-                    target="_blank">
-                    <img src="{{ asset('img/TIKTOK.PNG') }}" alt="">
-                </a>
-            </div>
-        </div>
-    </footer>
+
+    <script>
+        function increaseQuantity(id) {
+            let quantityElement = document.querySelector(`.quantity[data-id="${id}"]`);
+            let currentQuantity = parseInt(quantityElement.textContent, 10);
+            updateCart(id, currentQuantity + 1);
+        }
+
+        function decreaseQuantity(id) {
+            let quantityElement = document.querySelector(`.quantity[data-id="${id}"]`);
+            let currentQuantity = parseInt(quantityElement.textContent, 10);
+            if (currentQuantity > 1) {
+                updateCart(id, currentQuantity - 1);
+            }
+        }
+
+        function updateCart(id, quantity) {
+            fetch('{{ route('update.cart') }}', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        quantity: quantity
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    location.reload();
+                });
+        }
+
+        function removeFromCart(id) {
+            fetch('{{ route('remove.from.cart') }}', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        id: id
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    location.reload();
+                });
+        }
+    </script>
 
 </body>
 
